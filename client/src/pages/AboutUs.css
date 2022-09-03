@@ -1,0 +1,25 @@
+.deep{
+    background-color: #eeeeee;
+}
+.box{
+    display: flex;
+    align-items: center;
+}
+.box img{
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgb(23 23 23 / 24%);
+}
+@media only screen and  (max-width: 1000px) {
+    .box{
+        flex-direction: column;
+        gap: 0;
+    }
+    .box.left{
+        flex-direction: column-reverse;
+    }
+    .box img{
+        width: 300px;
+        height: auto;
+    }
+}

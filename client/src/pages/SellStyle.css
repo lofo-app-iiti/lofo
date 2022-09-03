@@ -1,0 +1,28 @@
+.hero{
+    height: 25vw;
+}
+ .hero div h1 {
+     font-size: 3vw;
+ }
+ .hero div p {
+     font-size: 1.5vw;
+ }
+
+@media screen and (max-width: 600px) {
+
+  .hero{
+    height: 100px;
+  }
+  .hero div h1{
+    font-size: 16px;
+  }
+  .hero div p{
+    font-size: 11px;
+  }
+   label{
+    font-size: 13px;
+  }
+  input , textarea{
+    font-size: 13px;
+  }
+}
