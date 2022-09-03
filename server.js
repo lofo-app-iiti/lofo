@@ -1,7 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const url = require('url');
+const path = require('path')
 const app = express();
 require('dotenv').config()
+
+// const clientdir = url.fileURLToPath(new URL('.', 'client'))
+app.use(express.static(path.join('.','client','build')))
 
 //Connection to DB
 mongoose.connect(process.env.MONGO_URI)
@@ -16,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
 //bodyParser middleware 
 app.use(express.json());
 
-app.use(express.static("./client/public"));
+
 
 //CORS
 app.use(require('cors')())
@@ -24,6 +29,10 @@ app.use(require('cors')())
 //API
 app.get('/', (req, res) => res.send("Welcome to the lofo server!"));
 app.use('/api', require('./API/api'));
+
+app.use((req, res, next) => {
+    res.sendFile(path.join('.', 'client', 'build', 'index.html'))
+})
 
 //Error middleWare
 app.use((err, req, res, next) => {

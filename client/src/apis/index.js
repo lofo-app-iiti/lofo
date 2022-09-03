@@ -1,9 +1,8 @@
 import axios from "axios";
 
-export const baseURL = process.env.REACT_APP_baseURL;
+export const baseURL = ''
 
 export const admin = ["lofo@iiti.ac.in"]
-
 
 // auth
 export const googleLogin = (name,email) => axios.post(baseURL + '/api/googlelogin', { name , email })
