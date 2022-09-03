@@ -4,7 +4,7 @@ COPY ./client/ ./
 RUN yarn install
 ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN ls -a
-RUN yarn build
+RUN yarn run build
 
 FROM node:18.2.0
 WORKDIR /app
