@@ -1,0 +1,23 @@
+#profile-image{
+    border-radius: 50% !important;
+    margin: 0px !important; 
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #ccc;
+}
+.navbar-toggler{
+    border: none !important;
+    color: black;
+    padding-right: 0;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(33,37,41, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+.nav-link:hover{
+   text-decoration: underline;
+}
+@media only screen and (max-width: 576px) {
+.nav-link {
+        border: none;
+    }
+}
