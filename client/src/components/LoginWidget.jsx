@@ -5,19 +5,21 @@ import { useHistory } from 'react-router';
 import LoginButton from './LoginButton'
 
 function LoginWidget(props) {
+
     const { auth } = props
     const history = useHistory();
     useEffect(() => {
         auth && history.push('/')
     })
 
-    console.log("In login widget",auth)
+    console.log("In login widget lol",auth)
 
     return (
         <div className="row h-100 m-0">
             <div className="col-9 d-flex align-items-center m-auto p-0 hero">
-                <img src="lofo.jpg" className='my-auto w-50' alt="" />
-                <img src="buy-sell.webp" className='my-auto w-50' alt="" />
+                <img src='lofo-poster.jpeg' className='my-auto w-100' alt=""/>
+                {/* <img src="lofo.jpg" className='my-auto w-50' alt="" /> */}
+                {/* <img src="buy-sell.webp" className='my-auto w-50' alt="" /> */}
             </div>
             <div className="col-12">
                 <div className="d-flex px-2 gap-3 h-100 flex-column bg-light justify-content-center align-items-center"
