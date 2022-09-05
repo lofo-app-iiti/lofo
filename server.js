@@ -32,7 +32,8 @@ app.get('/', (req, res) => res.send("Welcome to the lofo server!"));
 app.use('/api', require('./API/api'));
 
 app.use((req, res, next) => {
-    res.sendFile(path.join('.', 'client', 'build', 'index.html'))
+    // res.sendFile(path.join('.', 'client', 'build', 'index.html'))
+    res.sendFile('client/build/index.html',{root : '.'});
 })
 
 //Error middleWare
