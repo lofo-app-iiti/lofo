@@ -13,6 +13,7 @@ import Buy from './pages/Buy';
 import ProductPage from './pages/ProductPage';
 import { connect } from 'react-redux';
 import {getUser} from './apis/index'
+import Spinner from './components/Spinner';
 
 function Body(props) {
 
@@ -105,7 +106,7 @@ function Body(props) {
             <Route path='/sell' exact component={Sell} />
             <Route path='/lost' exact component={LostPage} />
             <Route path='/found' exact component={FoundPage} />
-            </>:""
+            </>:<Spinner/>
         }
         
         </>
