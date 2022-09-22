@@ -10,3 +10,8 @@
     border-radius: .25rem;
     padding: 10px 0;
 }
+
+.logout-btn{
+    width: 180px;
+    margin: 0 auto;
+}

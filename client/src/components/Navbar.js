@@ -10,6 +10,7 @@ import logo from '../svgs/logo.webp'
 
 function NavbarComponent(props) {
     const [path, setPath] = useState(null);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         setPath(window.location.pathname)
@@ -36,34 +37,21 @@ function NavbarComponent(props) {
 
 
     return (<>
-        <Navbar collapseOnSelect expand="lg" sticky='top' className='py-0 px-0 px-md-3' style={{
+        <Navbar collapseOnSelect expand="lg" sticky='top' expanded={expanded} style={{
             // borderBottom: "1px solid #cccccc",
-            backgroundColor: "white"
+            backgroundColor: "white",
+            padding :0,
+            margin : 0
         }}>
-            <Container fluid className='gap-2' >
+            <Container fluid className='gap-2' maxWidth={true} style={{
+                margin : 0
+            }} >
                 <Link to="/" className="navbar-brand logo d-flex" >
                     <img src={logo} alt='' className='my-auto' width={70} height={60} />
                 </Link>
-                <Navbar.Toggle className='non-outlined-btn' />
-                <Navbar.Collapse >
-                    <Nav className="ms-2 gap-0 gap-md-2">
-                        {/* <Dropdown id="collasible-nav-dropdown" className='my-auto'>
-                            {auth && <Dropdown.Toggle size='sm'
-                                style={{
-                                    border: "none",
-                                }}
-                                className='non-outlined-btn h-80 px-3 w-100' > Buy</Dropdown.Toggle>}
-                            <Dropdown.Menu >
-                                <Dropdown.Item eventKey='6' as={Link} to="/buy/All">All</Dropdown.Item>
-                                <Dropdown.Item eventKey='7' as={Link} to="/buy/Sports">Sports</Dropdown.Item>
-                                <Dropdown.Item eventKey='8' as={Link} to="/buy/Books">Books</Dropdown.Item>
-                                <Dropdown.Item eventKey='9' as={Link} to="/buy/Games">Games</Dropdown.Item>
-                                <Dropdown.Item eventKey='10' as={Link} to="/buy/Utilities">Utilities</Dropdown.Item>
-                                <NavDropdown.Divider />
-                                <Dropdown.Item eventKey='11' as={Link} to="/buy/Other">Others</Dropdown.Item>
-                            </Dropdown.Menu>
-
-                        </Dropdown> */}
+                <Navbar.Toggle className='non-outlined-btn' onClick={() => setExpanded(!expanded)}/>
+                <Navbar.Collapse width={100}>
+                    <Nav className="ms-2 gap-0 gap-md-2" onClick={() => setExpanded(false)}>
                         <hr className='m-1 ' />
                         {auth && <>
                             <hr className='m-1 ' />
@@ -89,11 +77,12 @@ function NavbarComponent(props) {
                     </Nav>
 
 
-                    <Nav className='ms-auto' >
+                    <Nav className='ms-auto' onClick={() => setExpanded(false)}>
                         {
                             auth ? <ProfileButton /> : window.location.pathname !== '/' ?
-                                <Link className='text-decoration-none' to={'/'}>Login</Link> :
-                                null
+                            <Link className='text-decoration-none' to={'/'}>Login</Link> :
+                            null
+                            
                         }
                     </Nav>
                 </Navbar.Collapse>

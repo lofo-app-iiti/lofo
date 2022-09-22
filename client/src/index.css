@@ -5,9 +5,7 @@
     font-family: 'Varela Round', sans-serif;
     scroll-behavior: auto !important;
 }
-.hero {
-    box-shadow: 0 1px 3px rgb(23 23 23 / 24%);
-}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -118,7 +116,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .found-btn{
-    background-color: rgb(101, 245, 103)
+    background-color: #01a103;
 }
 
 .buy-btn{

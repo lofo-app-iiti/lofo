@@ -208,7 +208,7 @@ function EditProfile(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-md-6">
+                    {/* <div className="col-12 col-md-6">
                         <div className="card-wrapper py-2 px-md-3">
                             <div className="card">
                                 <div className="card-header">Ads</div>
@@ -218,7 +218,6 @@ function EditProfile(props) {
                                         overflowX: "auto"
                                     }}
                                 >
-                                    {/* images of orders */}
                                     {
                                         props.loading ? <div>Loading...</div> : props.user.ads.length > 0 ? props.user.ads.map(f =>
                                             <img key={f.images[0].url} className='pe-1' alt='' src={f.images[0].url}
@@ -239,8 +238,9 @@ function EditProfile(props) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-12 col-md-6 mt-auto">
+                    </div> */}
+                    {/* className="col-12 col-md-6 mt-auto" */}
+                    <div className='logout-btn'>
                         <div className="text-center text-md-end my-2 mx-3">
                             <LogoutButton />
                         </div>
