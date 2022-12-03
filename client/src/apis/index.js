@@ -58,3 +58,4 @@ export const approve = (user, buyerEmail, itemId, itemTitle, notifId) => axios.p
         },
         notifId
     } , { headers: { authorization: localStorage.getItem('accessToken') }})
+export const undo =(id) => axios.put(baseURL+`/api/lost-found/undo/${id}`, {} , { headers: { authorization: localStorage.getItem('accessToken') } })

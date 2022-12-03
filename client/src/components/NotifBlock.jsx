@@ -1,14 +1,14 @@
-import { faArrowAltCircleRight, faEnvelope, faPhone, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faArrowAltCircleRight, faEnvelope, faPhone, faTrash, faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { approve, deleteNotif } from '../apis';
+import { approve, deleteNotif, undo } from '../apis';
 import { SendMail } from './SendMail';
 
 function NotifBlock(props) {
-    const { user, Update, items } = props
+    const { user, Update, items, lofoItems, Undo } = props
     const [deleting, setDeleting] = useState(false);
     const [open, setOpen] = useState(false)
     const [sending, setSending] = useState(false)
@@ -34,6 +34,23 @@ function NotifBlock(props) {
 
         }
     }
+
+    function UndoButton() {
+        const item = lofoItems.filter(i => i._id === itemId)[0];
+        return item && item.claimed ?
+            <button
+                disabled={!item.claimed}
+                type="button"
+                style={{ fontSize: '12px' }}
+                className="btn p-0 non-outlined-btn btn-transparent"
+                onClick={() => handleUndo(itemId)}
+            >
+                <FontAwesomeIcon icon={faUndo} className='text-danger me-2' />
+                Undo Claim
+            </button >
+            : <></>
+    }
+
     const handleApprove = (buyerEmail, itemTitle, itemId, buyerName) => {
         setSending(true)
         approve(user, buyerEmail, itemId, itemTitle, _id)
@@ -93,6 +110,21 @@ function NotifBlock(props) {
             })
     };
 
+    const handleUndo = (_id) => {
+        undo(_id)
+            .then(() => {
+                const newLofoItem = lofoItems.filter(lfitem => (lfitem._id === itemId))[0]
+                newLofoItem.claimed = false;
+                toast.success(`Claim undone`)
+                Undo(newLofoItem)
+            })
+            .catch(err => {
+                toast.error("Couldn't undo claim")
+                console.log(err)
+
+            })
+    }
+
     return (
         <div className="d-flex p-3 bg-light" key={_id}
             style={{
@@ -146,7 +178,10 @@ function NotifBlock(props) {
                                 itemId={itemId}
                                 buyerName={userName}
 
-                            /> : null
+                            />
+                            : message === "wants to claim" ?
+                                <UndoButton />
+                                : null
                     }
                 </div>
             </div>
@@ -174,7 +209,8 @@ const mapStateToProps = (state) => {
         user: state.user,
         auth: state.authorised,
         loading: state.loading,
-        items: state.items
+        items: state.items,
+        lofoItems: state.lofoItems
     }
 };
 
@@ -184,6 +220,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({ type: 'UPDATE_USER', payload: user })
             dispatch({ type: 'UPDATE_ITEM', payload: { id: itemId, doc } })
         },
+        Undo: (lofoItem) => dispatch({ type: 'UPDATE_LOFOITEM', payload: lofoItem })
     }
 };
 

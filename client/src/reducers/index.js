@@ -20,27 +20,27 @@ const initialState = {
     accessToken: localStorage.getItem('accessToken')
 }
 
-const Reducers = (state =  {
-        user: {
-            _id: '',
-            name: '',
-            imageUrl: '',
-            email: '',
-            mobile: 0,
-            program: '',
-            department: '',
-            graduationYear: 0,
-            notifications: [],
-            orders: [],
-            ads: [],
-            wishlist: [],
-        },
-        lofoItems: [],
-        items: [],
-        authorised: localStorage.getItem('accessToken') ? true : false,
-        authLoading: false,
-        accessToken: localStorage.getItem('accessToken')
-    }, action) => {
+const Reducers = (state = {
+    user: {
+        _id: '',
+        name: '',
+        imageUrl: '',
+        email: '',
+        mobile: 0,
+        program: '',
+        department: '',
+        graduationYear: 0,
+        notifications: [],
+        orders: [],
+        ads: [],
+        wishlist: [],
+    },
+    lofoItems: [],
+    items: [],
+    authorised: localStorage.getItem('accessToken') ? true : false,
+    authLoading: false,
+    accessToken: localStorage.getItem('accessToken')
+}, action) => {
     switch (action.type) {
 
         // user Reducer ----------------------------------------------->
@@ -52,11 +52,11 @@ const Reducers = (state =  {
                 authLoading: false,
                 accessToken: action.payload.accessToken
             };
-        
+
         case 'SET_USER':
-            return{
+            return {
                 ...state,
-                user : action.payload.user
+                user: action.payload.user
             };
 
         case 'CLEAR_USER':
@@ -125,8 +125,8 @@ const Reducers = (state =  {
         case 'UPDATE_LOFOITEM':
             return {
                 ...state,
-                lofoItems: state.lofoItems[state.lofoItems.findIndex((o => o._id === action.payload._id))]
-                    = action.payload,
+                lofoItems: [...state.lofoItems, state.lofoItems[state.lofoItems.findIndex((o => o._id === action.payload._id))]
+                    = action.payload],
             };
         case 'CREATE_LOFOITEM':
             return {

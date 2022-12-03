@@ -94,37 +94,39 @@ route.put('/notify/:id', authToken, (req, res, next) => {
                 }
             })
                 .then(user => {
+                    if (user != null) {
+                        res.status(200).send(`Already notified ${item.userName}`);
+                    } else {
+                        User.findById(req.auth.id)
+                            .select('name')
+                            .then(user => {
+                                req.body.notification['userName'] = user.name
+                                req.body.notification['userEmail'] = req.auth.email
+                                req.body.notification.read = false;
+                                req.body.notification._id = new mongoose.Types.ObjectId();
 
-                    User.findById(req.auth.id)
-                        .select('name')
-                        .then(user => {
-                            req.body.notification['userName'] = user.name
-                            req.body.notification['userEmail'] = req.auth.email
-                            req.body.notification.read = false;
-                            req.body.notification._id = new mongoose.Types.ObjectId();
+                                const io = require('../../config/socket').get();
+                                io.to(item.userEmail).emit('notification', req.body.notification)
 
-                            const io = require('../../config/socket').get();
-                            io.to(item.userEmail).emit('notification', req.body.notification)
-
-                            User.updateOne({ email: item.userEmail },
-                                { "$push": { "notifications": req.body.notification } },
-                            )
-                                .then(() => {
-                                    LostFound.updateOne({ _id: req.params.id },
-                                        { $set: { claimed: true } }
-                                    )
-                                        .then(() => {
-                                            res.status(200).send({
-                                                item,
-                                                message: `Notified ${item.userName}`
-                                            });
-                                        })
-                                        .catch(next);
-                                })
-                                .catch(next);
-                        })
-                        .catch(next);
-
+                                User.updateOne({ email: item.userEmail },
+                                    { "$push": { "notifications": req.body.notification } },
+                                )
+                                    .then(() => {
+                                        LostFound.updateOne({ _id: req.params.id },
+                                            { $set: { claimed: true } }
+                                        )
+                                            .then(() => {
+                                                res.status(200).send({
+                                                    item,
+                                                    message: `Notified ${item.userName}`
+                                                });
+                                            })
+                                            .catch(next);
+                                    })
+                                    .catch(next);
+                            })
+                            .catch(next);
+                    }
                 })
                 .catch(next);
         })
@@ -135,28 +137,32 @@ route.put('/notify/:id', authToken, (req, res, next) => {
 
 
 
-//Edit a posted item                               
-// route.put('/:id', (req, res, next) => {
-//     Item.updateOne({ _id: req.params.id }, req.body)
-//         .then(
-//             Item.findById(req.params.id)
-//                 .then((item) => {
-//                     res.header("Access-Control-Allow-Origin", "*");
-//                     res.status(200).send(`Your Ad, ${item.name} has been updated`);
-//                 })
-//         )
-//         .catch(next);
-// });
+// Undo claim                               
+route.put('/undo/:id', authToken, (req, res, next) => {
+    LostFound.findById(req.params.id)
+        .select('userEmail')
+        .then(item => {
+            if (item.userEmail === req.auth.email || req.auth.email === process.env.admin) {
+                LostFound.updateOne({ _id: req.params.id },
+                    { $set: { claimed: false } }
+                )
+                    .then(() => {
+                        res.status(200).end()
+                    })
+            } else {
+                res.status(403).end();
+            }
+        })
+});
 
 //-------------------------------------------------------------------------//
-const admin = "technicals.tedx@iiti.ac.in";
 
 //Delete a posted item                              
 route.delete('/:id', authToken, (req, res, next) => {
     LostFound.findById(req.params.id)
         .select('images userEmail')
         .then(async item => {
-            if (item.userEmail === req.auth.email || req.auth.email === admin) {
+            if (item.userEmail === req.auth.email || req.auth.email === process.env.admin) {
                 if (item.images.public_id) {
                     await removeFromCloudinary(item.images.public_id);
                 }

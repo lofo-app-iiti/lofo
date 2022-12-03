@@ -39,6 +39,7 @@ function LoFoCard(props) {
         setSending(true)
         if (auth) {
             let notification = {
+                itemId:_id,
                 itemTitle: title,
                 mobile: user.mobile,
                 dp: user.imageUrl
