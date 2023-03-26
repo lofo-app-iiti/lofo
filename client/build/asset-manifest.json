@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cf232229.chunk.css",
+    "main.js": "/static/js/main.7f131c60.chunk.js",
+    "main.js.map": "/static/js/main.7f131c60.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5043f04b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5043f04b.js.map",
+    "static/css/2.676e5586.chunk.css": "/static/css/2.676e5586.chunk.css",
+    "static/js/2.0b5b27be.chunk.js": "/static/js/2.0b5b27be.chunk.js",
+    "static/js/2.0b5b27be.chunk.js.map": "/static/js/2.0b5b27be.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.676e5586.chunk.css.map": "/static/css/2.676e5586.chunk.css.map",
+    "static/css/main.cf232229.chunk.css.map": "/static/css/main.cf232229.chunk.css.map",
+    "static/js/2.0b5b27be.chunk.js.LICENSE.txt": "/static/js/2.0b5b27be.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/lost.108480a6.png",
+    "static/media/logo.fac722cd.webp": "/static/media/logo.fac722cd.webp",
+    "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5043f04b.js",
+    "static/css/2.676e5586.chunk.css",
+    "static/js/2.0b5b27be.chunk.js",
+    "static/css/main.cf232229.chunk.css",
+    "static/js/main.7f131c60.chunk.js"
+  ]
+}
