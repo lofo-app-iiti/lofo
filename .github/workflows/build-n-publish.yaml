@@ -27,7 +27,7 @@ jobs:
       - name: Set docker repo name
         run: |
           echo "repository name is $REPOSITORY_NAME"
-          echo "DOCKER_REPO=lofowebteam/$REPOSITORY_NAME" >> $GITHUB_ENV
+          echo "DOCKER_REPO=lofoiiti/$REPOSITORY_NAME" >> $GITHUB_ENV
       - name: Docker login
         run: |
           docker login -u lofoiiti -p "${{ secrets.DOCKERHUB_TOKEN }}"
