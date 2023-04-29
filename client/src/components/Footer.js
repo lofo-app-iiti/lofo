@@ -10,7 +10,7 @@ const Footer = () => {
 
                     <div className="col-12 col-md-6 text-center text-md-start">
                         <div style={{ fontSize: 14 }}>
-                            LoFo | IIT Indore &copy; 2022
+                            LoFo | IIT Indore &copy; 2023
                         </div>
                     </div>
                     <div className="col-12 col-md-6 text-center text-md-end">
