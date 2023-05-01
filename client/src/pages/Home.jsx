@@ -36,7 +36,7 @@ export default function Home() {
                     <div className="card p-4 home-card-sell">
                         <h2>Sell Items</h2>
                         <p>One can sell their stuff to others if it’s not useful to them further or they are passing out of college.</p>
-                        <Link className='non-outlined-btn text-decoration-none' to={'/buy/All'}>
+                        <Link className='non-outlined-btn text-decoration-none' to={'/sell'}>
                             <button class="button-template sell-btn">View &#8594;</button>
                         </Link>
                     </div>
